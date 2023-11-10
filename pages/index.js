@@ -21,6 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!session && status !== "loading") {
+      console.log("rerouting");
       router.push('api/auth/signin');
     }
   });
