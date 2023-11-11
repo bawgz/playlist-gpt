@@ -30,17 +30,18 @@ export default async function (req, res) {
 
   try {
     const completion = await openai.createChatCompletion({
-      model: "gpt-4",
+      model: "gpt-4-1106-preview",
       messages: [
-        { role: "system", content: "You are PlaylistGPT, a large language model specializing in generating playlists based on a theme. Your responses should only contain a JSON object with fields for song, artist, and reason. There should be no other characters in the response aside from the JSON. The songs should be real and should be popular within their respective genres." },
+        { role: "system", content: "You are PlaylistGPT, a large language model specializing in generating playlists based on a theme. Your responses should be a JSON object with fields for song, artist, and reason. The songs should be real and should be popular within their respective genres." },
         {
           role: "user",
-          content: `Please response with a song that would fit well in this playlist: ${JSON.stringify(songs)}.
+          content: `Please respond with a song that would fit well in this playlist: ${JSON.stringify(songs)}.
             The song should fit in this theme: ${theme}.
             It should not be a song contained in this list: ${JSON.stringify(removedSongs)}`
         }
       ],
-      max_tokens: 2000
+      max_tokens: 2000,
+      response_format: { type: "json_object" },
     });
 
     console.log(completion.data);

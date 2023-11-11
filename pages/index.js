@@ -45,7 +45,7 @@ export default function Home() {
       }
 
       console.log(data);
-      setResult(data);
+      setResult(data.playlist);
     } catch (error) {
       console.error(error);
       alert(error.message);

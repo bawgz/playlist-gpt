@@ -29,13 +29,14 @@ export default async function (req, res) {
     const completion = await openai.createChatCompletion({
       model: "gpt-4-1106-preview",
       messages: [
-        { role: "system", content: "You are PlaylistGPT, a large language model specializing in generating playlists based on a theme. The response should only contain a JSON array with each element containing song, artist, and reason field and there should be no other characters in the response aside from the JSON array. The songs should be real and should be popular within their respective genres." },
+        { role: "system", content: "You are PlaylistGPT, a large language model specializing in generating playlists based on a theme. Your response should be a JSON object with a playlist field. The playlist field should be an array with each element containing song, artist, and reason fields. The songs should be real and should be popular within their respective genres." },
         { role: "user", content: `Please generate a playlist of 10 songs that matches the sentiment of this theme: ${theme}.` }
       ],
-      max_tokens: 2000
+      max_tokens: 2000,
+      response_format: { type: "json_object" },
     });
 
-    console.log(completion.data);
+    console.log(completion.data.choices[0].message.content);
     res.status(200).json(JSON.parse(completion.data.choices[0].message.content));
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
