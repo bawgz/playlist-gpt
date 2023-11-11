@@ -10,15 +10,10 @@ export default async function (req, res) {
   try {
     const session = await getServerSession(req, res, authOptions);
 
-    const profileResponse = await axios.get(
-      `${SPOTIFY_BASE_URL}/me`,
-      { headers: { 'Authorization': `Bearer ${session.accessToken}` } }
-    );
+    console.log("SESSION: ");
+    console.log(session);
 
-    console.log("------------profileResponse----------------");
-    console.log(profileResponse);
-
-    const profileId = profileResponse.data.id;
+    const profileId = session.user.id;
 
     const playlistRequestData = {
       "name": req.body.theme,

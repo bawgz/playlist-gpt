@@ -20,7 +20,8 @@ export const authOptions = {
                     accessToken: account.access_token,
                     accessTokenExpires: account.expires_at,
                     refreshToken: account.refresh_token,
-                }
+                    user: user,
+                };
             }
 
             console.log("Token: ");
@@ -70,7 +71,10 @@ export const authOptions = {
             // Send properties to the client, like an access_token from a provider.
             console.log("-------- Im in the session function-----------------");
             console.log(JSON.stringify(token));
-            session.accessToken = token.accessToken
+            console.log("USER: ");
+            console.log(user);
+            session.accessToken = token.accessToken;
+            session.user = token.user;
             console.log("session");
             console.log(session);
             return session

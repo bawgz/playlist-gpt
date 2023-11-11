@@ -30,7 +30,7 @@ export default async function (req, res) {
       model: "gpt-4",
       messages: [
         { role: "system", content: "You are PlaylistGPT, a large language model specializing in generating playlists based on a theme. The response should only contain a JSON array with each element containing song, artist, and reason field and there should be no other characters in the response aside from the JSON array. The songs should be real and should be popular within their respective genres." },
-        { role: "user", content: `Please generate a playlist of 10 songs that matches the sentiment of this theme: ${theme}.` }
+        { role: "user", content: `Please generate a playlist of 3 songs that matches the sentiment of this theme: ${theme}.` }
       ],
       max_tokens: 2000
     });
